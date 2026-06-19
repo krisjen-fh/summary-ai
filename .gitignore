@@ -1,0 +1,48 @@
+# Node Modules
+
+client/node_modules/
+server/node_modules/
+
+# Environment Files
+
+.env
+server/.env
+client/.env
+
+# Build Files
+
+dist/
+build/
+
+# Typescript
+
+*.tsbuildinfo
+
+
+#pyton
+
+__pycache__/
+*.pyc
+*.pyo
+
+
+# .env
+
+venv/
+env/
+.python-version
+
+
+# vscode
+
+.vscode/
+
+
+# logs
+
+*.log
+
+
+# OS File
+
+.DS_Store
