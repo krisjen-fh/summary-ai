@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import processNewsRoute from "./routes/processNews.routes";
-import scrapeRoutes from "./routes/scrape.routes"
+// import scrapeRoutes from "./routes/scrape.routes"
 import summaryRoutes from "./routes/summary.routes";
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use("/api/test", testRoutes);
 
-app.use("/api/scrape", scrapeRoutes);
+// app.use("/api/scrape", scrapeRoutes);
 
 app.use("/api/summary", summaryRoutes)
 

@@ -7,18 +7,35 @@ export const handleProcessNews = async (
     res: Response
 ) => {
     try {
-        const result = await processNews();
+        
+        const { source } = req.body;
+
+        console.log(source);
+
+        const result = await processNews(source);
 
         res.json({
+
             success: true,
-            articles_count: result.articles.length,
-            summary: result.summary
+
+            data: {
+                source: source.toUpperCase(),
+
+                articles_count: result.articles.length,
+                
+                summary: result.summary,
+
+                generated_at: new Date().toISOString()
+
+            }
         });
     } catch (error) {
-        console.error(error);
+
+        console.log(error);
+
         res.status(500).json({
-            success:false,
-            message: "News processing failed"
+            success: false,
+            message: "AI Service unavailable"
         });
     }
 };

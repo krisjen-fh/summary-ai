@@ -5,10 +5,12 @@
 
 import { spawn } from "child_process";
 
-export const getbatamNewsArticles = (): Promise<any> => {
+export const runPythonRunner = (
+    scripPath: string
+): Promise<any> => {
     return new Promise((resolve, reject) => {
         const pythonProcess = spawn("python/venv/Scripts/python.exe", [
-            "./python/batamnews/scraper.py"
+            scripPath
         ]);
 
         let dataBuffer = "";
