@@ -14,28 +14,48 @@ export const handleProcessNews = async (
 
         const result = await processNews(source);
 
+        const sourceNameMap: Record<string, string> = {
+            batamnews: "Batam News",
+            tribunnews: "Tribun Batam",
+            batampos: "Batam Pos"
+        };
+
         res.json({
 
             success: true,
 
             data: {
-                source: source.toUpperCase(),
+                source: sourceNameMap[source],
 
                 articles_count: result.articles.length,
                 
                 summary: result.summary,
 
-                generated_at: new Date().toISOString()
+                generated_at: new Date().toISOString(),
+
+                articles: result.articles
 
             }
         });
-    } catch (error) {
+    } catch (error: any) {
 
-        console.log(error);
+        if (error.message === "GEMINI_QUOTA_EXCEEDED") {
+            return res.status(429).json({
+                success: false,
+                error: error.message
+            });
+        }
 
-        res.status(500).json({
+        if (error.message === "GEMINI_UNAVAILABLE") {
+            return res.status(503).json({
+                success: false,
+                error: error.message
+            });
+        }
+
+        return res.status(500).json({
             success: false,
-            message: "AI Service unavailable"
+            error: error.message
         });
     }
 };

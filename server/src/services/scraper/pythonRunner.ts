@@ -26,7 +26,11 @@ export const runPythonRunner = (
 
         pythonProcess.on("close", (code) => {
             if (code !== 0) {
-                reject(errorBuffer);
+                reject(
+                    new Error(
+                        "SCRAPER_FAILED"
+                    )
+                );
                 return;
             }
 

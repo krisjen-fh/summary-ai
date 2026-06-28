@@ -59,33 +59,33 @@ export const summarizeArticles = async (
                 await model.generateContent(
                     prompt
                 );
-
             return result.response.text();
 
         } catch (error: any) {
+
+            if (error.status === 429) {
+                throw new Error(
+                    "GEMINI_QUOTA_EXCEEDED"
+                );
+            }
 
             if (error.status === 503) {
 
                 console.log(
                     "Gemini busy, retrying..."
                 );
-
                 retries--;
-
                 console.log(
                     `Gemini busy. Retry left: ${retries}`
                 );
-
                 await delay(3000);
+                continue;
 
-            } else {
-
-                throw error;
-
-            }
+            } 
+            
+            throw error;
         }
     }
-
     throw new Error(
         "Gemini unavailable."
     );

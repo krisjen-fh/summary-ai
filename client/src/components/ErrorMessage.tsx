@@ -2,7 +2,9 @@ type Props = {
     message: string;
 };
 
-const ErrorMessage = ({ message }: Props) => {
+const ErrorMessage = ({ 
+    message 
+}: Props) => {
     return (
         <div className="error-box">
             {message}

@@ -4,6 +4,10 @@ export const parseSummary = (
 
   const lines = text.split("\n");
 
+  const cleanText = (text: string) => {
+    return text.replace(/\*/g, "").trim();
+  }
+
   let mainSummary = "";
   let topics: string[] = [];
   let conclusion = "";
@@ -46,6 +50,9 @@ export const parseSummary = (
       conclusion += line + " ";
     }
   }
+
+  mainSummary = cleanText(mainSummary);
+  conclusion = cleanText(conclusion);
 
   return {
     mainSummary,

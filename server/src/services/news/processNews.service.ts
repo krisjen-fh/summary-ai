@@ -1,6 +1,7 @@
 import { runPythonRunner } from "../scraper/pythonRunner";
 import { summarizeArticles } from "../gemini/gemini.service";
 import { cleanArticleText } from "../../utils/textCleaner";
+import { ERRORS } from "../../utils/errors";
 
 export const processNews = async (
     source: string
@@ -11,14 +12,18 @@ export const processNews = async (
     // penentuan ambil berita darimana
     if (source === "batamnews") {
         articles = await runPythonRunner("python/batamnews/scraper.py");
-    } else if (source === "tribunbatam") {
-        "Tribunbatam not ready yet."
+    } else if (source === "tribunnews") {
+        
+        throw new Error(ERRORS.TRIBUN);
+
     } else if (source === "batampos") {
-        "Batam Pos not ready yet."
+        
+        throw new Error(ERRORS.BATAM_POS);
+
     } else {
-        throw new Error(
-            "Invalid source."
-        );
+
+        throw new Error(ERRORS.INVALID_SOURCE);
+
     }
 
     // scrape berita

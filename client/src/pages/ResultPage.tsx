@@ -13,21 +13,23 @@ const ResultPage = () => {
   return (
 
     <div className="page-container">
-      <button
-        className="back-btn"
-        onClick={() => navigate("/")}
-      >
-        Kembali
-      </button>
+      <div className="result-header">
+        <button
+          className="back-btn"
+          onClick={() => navigate("/")}
+        >
+          Kembali
+        </button>
+        <h1>Hasil Analisis Berita</h1>
+      </div>
       <div className="content-wrap">
-
         <SummaryCard
           summary={result.data.summary}
           articleCount={result.data.articles_count}
           source={result.data.source}
+          articles={result.data.articles}
         />
-
-      </div>
+      </div>      
     </div>
 
   );
