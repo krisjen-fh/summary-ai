@@ -1,6 +1,8 @@
 import { useLocation } from "react-router-dom";
-import SummaryCard from "../components/SummaryCard";
 import { useNavigate } from "react-router-dom";
+import SummaryCard from "../components/SummaryCard";
+import AnalysisCard from "../components/AnalysisCard";
+import VisualizationCard from "../components/VisualizationCard";
 
 const ResultPage = () => {
 
@@ -23,13 +25,36 @@ const ResultPage = () => {
         <h1>Hasil Analisis Berita</h1>
       </div>
       <div className="content-wrap">
+
         <SummaryCard
           summary={result.data.summary}
           articleCount={result.data.articles_count}
           source={result.data.source}
-          articles={result.data.articles}
+          keyword={result.data.keyword}
         />
-      </div>      
+
+        <AnalysisCard
+          articles={result.data.articles}
+
+          sentimentDistribution={
+            result.data.sentiment_distribution
+          }
+
+          wordcloudPath={
+            result.data.wordcloud_path
+          }
+
+          sentimentChartPath={
+            result.data.sentiment_chart_path
+          }
+        />
+
+        <VisualizationCard
+          wordcloudPath={result.data.wordcloudPath}
+          sentimentChartPath={result.data.sentimentChartPath}
+        />
+
+      </div>    
     </div>
 
   );

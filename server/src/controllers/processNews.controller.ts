@@ -8,11 +8,11 @@ export const handleProcessNews = async (
 ) => {
     try {
         
-        const { source } = req.body;
+        const { source, keyword } = req.body;
 
         console.log(source);
 
-        const result = await processNews(source);
+        const result = await processNews(source, keyword);
 
         const sourceNameMap: Record<string, string> = {
             batamnews: "Batam News",
@@ -26,18 +26,19 @@ export const handleProcessNews = async (
 
             data: {
                 source: sourceNameMap[source],
-
-                articles_count: result.articles.length,
-                
+                articles_count: result.articles.length,                
                 summary: result.summary,
-
                 generated_at: new Date().toISOString(),
-
-                articles: result.articles
-
+                articles: result.articles,
+                sentiment_distribution: result.sentimentDistribution,
+                wordcloud: result.wordcloudPath,
+                sentiment_chart: result.sentimentChartPath
             }
         });
     } catch (error: any) {
+
+        console.log("FULL BACKEND ERROR: ");
+        console.log(error);
 
         if (error.message === "GEMINI_QUOTA_EXCEEDED") {
             return res.status(429).json({

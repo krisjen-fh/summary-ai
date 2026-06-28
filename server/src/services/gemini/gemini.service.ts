@@ -18,10 +18,43 @@ export const summarizeArticles = async (
     articles: string[]
 ) => {
 
-    const combinedArticles =
-        articles.join("\n\n");
+    const chunks = [];
+    for (let i = 0; i < articles.length; i += 3) {
+    chunks.push(
+        articles.slice(i, i + 3)
+    );
+    }
+
+    let partialSummaries = [];
+
+    for (const chunk of chunks) {
 
     const prompt = `
+    Berikut beberapa artikel berita.
+
+    ${chunk.join("\n\n")}
+
+    Tugas:
+    1. Ringkas inti berita
+    2. Ambil informasi penting
+    3. Tulis dalam Bahasa Indonesia singkat
+
+    Return summary only.
+    `;
+
+    const result =
+        await model.generateContent(prompt);
+
+    partialSummaries.push(
+        result.response.text()
+    );
+    }
+
+
+    const combinedArticles =
+        partialSummaries.join("\n\n");
+
+    const finalPrompt = `
         You are a professional news analyst.
 
         Below are multiple news articles.
@@ -57,7 +90,7 @@ export const summarizeArticles = async (
 
             const result =
                 await model.generateContent(
-                    prompt
+                    finalPrompt
                 );
             return result.response.text();
 

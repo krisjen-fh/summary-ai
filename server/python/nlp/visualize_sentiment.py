@@ -27,4 +27,4 @@ def create_sentiment_chart(articles):
 
     plt.savefig(save_path)
 
-    plt.close()
+    return save_path

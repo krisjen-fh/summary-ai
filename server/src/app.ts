@@ -1,13 +1,12 @@
 import testRoutes from "./routes/test.routes";
 import express from "express";
 import cors from "cors";
+import path from "path";
 import dotenv from "dotenv";
 
 dotenv.config();
 
 import processNewsRoute from "./routes/processNews.routes";
-// import scrapeRoutes from "./routes/scrape.routes"
-import summaryRoutes from "./routes/summary.routes";
 
 const app = express();
 
@@ -17,11 +16,9 @@ app.use(express.json());
 
 app.use("/api/test", testRoutes);
 
-// app.use("/api/scrape", scrapeRoutes);
-
-app.use("/api/summary", summaryRoutes)
-
 app.use("/api/process-news", processNewsRoute)
+
+app.use("/output", express.static(path.join(__dirname, "../python/nlp")))
 
 app.post("/test", (req, res) => {
   console.log(req.body);

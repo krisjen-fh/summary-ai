@@ -5,13 +5,15 @@ const api = axios.create({
 });
 
 export const processNews = async (
-    source: string
+    source: string,
+    keyword: string
 ) => {
 
     const response = await api.post(
         "/process-news",
         {
-            source: source
+            source: source,
+            keyword: keyword
         }
     );
 

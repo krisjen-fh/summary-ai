@@ -1,27 +1,31 @@
-// spawn python process
-// read stdout
-// convert JSON
-// return data
-
 import { spawn } from "child_process";
 
 export const runPythonRunner = (
-    scripPath: string
+    keyword: string
 ): Promise<any> => {
     return new Promise((resolve, reject) => {
-        const pythonProcess = spawn("python/venv/Scripts/python.exe", [
-            scripPath
-        ]);
+        console.log("Running Python with keyword:", keyword);
+        const pythonProcess = spawn("venv/Scripts/python.exe", [
+            "-m",
+            "nlp.pipeline",
+            keyword
+        ],
+        {
+            cwd: "python"
+        }
+    );
 
         let dataBuffer = "";
         let errorBuffer = "";
 
         pythonProcess.stdout.on("data", (data) => {
             dataBuffer += data.toString();
+            console.log("python raw output: ", dataBuffer);
         });
 
         pythonProcess.stderr.on("data", (data) => {
             errorBuffer += data.toString();
+            console.log("PYTHON STDERR: ", errorBuffer);
         });
 
         pythonProcess.on("close", (code) => {

@@ -12,7 +12,10 @@ import ErrorMessage from "../components/ErrorMessage";
 const HomePage = () => {
   const [loading, setLoading] = useState(false);
   
+  // untuk sementara pake fix yang batamnews dulu yak
   const [source, setSource] = useState("batamnews");
+
+  const [keyword, setKeyword] = useState("");
 
   console.log("SELECTED SOURCE:", source);
 
@@ -24,10 +27,15 @@ const HomePage = () => {
 
     setError("");
 
+    if (!keyword) {
+      setError("Masukkan keyword dulu.");
+      return;
+    }
+
     try {
       setLoading(true);
 
-    const result = await processNews(source);
+    const result = await processNews(source, keyword);
 
 
       navigate("/result", {
@@ -103,6 +111,14 @@ const HomePage = () => {
             source={source}
             setSource={setSource}
           />
+
+          <input 
+            type="text"
+            placeholder="Masukkan keyword..."
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
+
           {
             loading ? (
               <LoadingSpinner 
