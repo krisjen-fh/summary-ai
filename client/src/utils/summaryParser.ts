@@ -2,57 +2,96 @@ export const parseSummary = (
   text: string
 ) => {
 
-  const lines = text.split("\n");
+  // cleanup output bawaan Gemini yang suka nambah intro
+  text = text
+    .replace(
+      /Berikut adalah ringkasan dari artikel-artikel berita tersebut:?/gi,
+      ""
+    )
+    .replace(
+      /\*\*Ringkasan Utama\*\*/gi,
+      ""
+    )
+    .replace(
+      /Ringkasan Utama:?/gi,
+      ""
+    )
+    .trim();
 
-  const cleanText = (text: string) => {
-    return text.replace(/\*/g, "").trim();
-  }
+  const lines = text
+    .split("\n")
+    .map(line => line.trim())
+    .filter(Boolean);
 
   let mainSummary = "";
   let topics: string[] = [];
   let conclusion = "";
 
-  let mode = "";
+  let mode = "summary";
 
   for (const line of lines) {
 
+    const lower = line.toLowerCase();
+
+    // pindah mode ke topik
     if (
-      line.includes("Main topics") ||
-      line.includes("Topik")
+      lower.includes("main topics") ||
+      lower.includes("topik utama") ||
+      lower === "topik"
     ) {
       mode = "topics";
       continue;
     }
 
+    // pindah mode ke kesimpulan
     if (
-      line.includes("General conclusion") ||
-      line.includes("Kesimpulan")
+      lower.includes("general conclusion") ||
+      lower.includes("kesimpulan")
     ) {
       mode = "conclusion";
       continue;
     }
 
-    if (mode === "") {
+    // bagian summary utama
+    if (mode === "summary") {
       mainSummary += line + " ";
     }
 
+    // bagian topik
     else if (mode === "topics") {
 
-      if (line.includes("*") || line.includes("-")) {
+      // kalau ada bullet numbering
+      if (
+        /^(\d+\.|-|\*|•)/.test(line)
+      ) {
         topics.push(
-          line.replace("*", "").replace("-", "").trim()
+          line.replace(
+            /^(\d+\.|-|\*|•)\s*/,
+            ""
+          )
         );
       }
 
+      // kalau Gemini ga kasih bullet
+      else {
+        topics.push(line);
+      }
     }
 
+    // bagian conclusion
     else if (mode === "conclusion") {
       conclusion += line + " ";
     }
   }
 
-  mainSummary = cleanText(mainSummary);
-  conclusion = cleanText(conclusion);
+  // final cleanup tambahan
+  mainSummary = mainSummary
+    .replace(/^\:+/, "")
+    .trim();
+
+  conclusion = conclusion
+    .replace(/^\:+/, "")
+    .trim();
 
   return {
     mainSummary,

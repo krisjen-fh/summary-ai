@@ -1,4 +1,3 @@
-import os
 import matplotlib.pyplot as plt
 from collections import Counter
 
@@ -21,10 +20,8 @@ def create_sentiment_chart(articles):
 
     plt.title("Sentiment Distribution")
 
-    current_dir = os.path.dirname(__file__)
-
-    save_path = os.path.join(current_dir, "sentiment_chart.png")
+    save_path = "nlp/sentiment_chart.png"
 
     plt.savefig(save_path)
 
-    return save_path
+    return "output/sentiment_chart.png"

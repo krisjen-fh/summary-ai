@@ -30,6 +30,7 @@ export const processNews = async (
     const sentimentDistribution = pipelineResult.sentiment_summary;
     const wordcloudPath = pipelineResult.wordcloud;
     const sentimentChartPath = pipelineResult.sentiment_chart_path;
+
     // kirim ke gemini
     // const summary = await summarizeArticles(
     //     pipelineResult.articles.map(
@@ -42,20 +43,24 @@ export const processNews = async (
         pipelineResult
     );
 
+    console.log("wordcloudPath", wordcloudPath);
+    console.log("sentimentChartPath", sentimentChartPath);
+
     // dummy dulu
-    const summary = "testing backend";
+    // const summary = "testing backend";
 
     const topContents = articles.map(
         (article: any) => article.content
     );
 
-    // const summary = await summarizeArticles(topContents);
+    const summary = await summarizeArticles(topContents);
 
     return {
         articles,
         summary,
         sentimentDistribution,
         wordcloudPath,
-        sentimentChartPath
+        sentimentChartPath,
+        keyword
     };
 };

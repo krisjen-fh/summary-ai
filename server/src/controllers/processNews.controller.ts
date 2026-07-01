@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { processNews } from "../services/news/processNews.service";
-import { summarizeArticles } from "../services/gemini/gemini.service";
 
 export const handleProcessNews = async (
     req: Request,
@@ -32,7 +31,8 @@ export const handleProcessNews = async (
                 articles: result.articles,
                 sentiment_distribution: result.sentimentDistribution,
                 wordcloud: result.wordcloudPath,
-                sentiment_chart: result.sentimentChartPath
+                sentiment_chart: result.sentimentChartPath,
+                keyword: keyword
             }
         });
     } catch (error: any) {

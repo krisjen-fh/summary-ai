@@ -16,7 +16,7 @@ def scrape_batamnews():
     for url in base_url_links:
 
         response = requests.get(url)
-        print(response.status_code)
+        # print(response.status_code)
 
         soup = BeautifulSoup(
             response.text,

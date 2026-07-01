@@ -1,16 +1,21 @@
 const Header = () => {
   return (
-    <div className="header">
-      <h1>
-        SUMMARY AI NEWS (Batam)
-      </h1>
+    <header className="header">
 
-      <p>
-        Ringkasan Berita terbaru tentang Batam
-      </p>
-      
-    </div>
-  )
+      <div className="header-overlay">
+
+        <h1>
+          Summary AI News
+        </h1>
+
+        <p>
+          Ringkas berita regional dengan AI 
+        </p>
+
+      </div>
+
+    </header>
+  );
 };
 
 export default Header;

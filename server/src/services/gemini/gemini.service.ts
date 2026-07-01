@@ -67,7 +67,7 @@ export const summarizeArticles = async (
         5. Keep summary concise but informative
 
         Summary Procedure:
-        1. Main summary (maximum 2 paragraphs)
+        1. Main summary (maximum 2 paragraphs). Don't put any opening words.
 
         2. Main topics discussed:
         - point 1

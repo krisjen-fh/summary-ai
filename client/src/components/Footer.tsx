@@ -1,12 +1,16 @@
 const Footer = () => {
   return (
+    <footer className="footer">
+      <p>
+        Powered by Gemini AI • React • Express.js • Python
+      </p>
 
-    <div className="footer">
+      <br></br>
 
-      Powered by Gemini AI • React • Express.js
-
-    </div>
-
+      <p>
+        Made by Krisjen
+      </p>
+    </footer>
   );
 };
 

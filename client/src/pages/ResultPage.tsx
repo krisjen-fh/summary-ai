@@ -2,7 +2,6 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SummaryCard from "../components/SummaryCard";
 import AnalysisCard from "../components/AnalysisCard";
-import VisualizationCard from "../components/VisualizationCard";
 
 const ResultPage = () => {
 
@@ -11,6 +10,8 @@ const ResultPage = () => {
   const navigate = useNavigate();
 
   const result = location.state;
+  console.log("sentiment_chart:", result.data.sentiment_chart)
+  console.log("wordcloud:", result.data.wordcloud)
 
   return (
 
@@ -41,19 +42,13 @@ const ResultPage = () => {
           }
 
           wordcloudPath={
-            result.data.wordcloud_path
+            result.data.wordcloud
           }
 
           sentimentChartPath={
-            result.data.sentiment_chart_path
+            result.data.sentiment_chart
           }
         />
-
-        <VisualizationCard
-          wordcloudPath={result.data.wordcloudPath}
-          sentimentChartPath={result.data.sentimentChartPath}
-        />
-
       </div>    
     </div>
 

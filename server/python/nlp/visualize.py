@@ -12,4 +12,4 @@ def generate_wordcloud(text):
 
     wc.to_file(output_path)
 
-    return output_path
+    return" output/wordcloud.png"

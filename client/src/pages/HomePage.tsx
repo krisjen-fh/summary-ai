@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { processNews } from "../services/api";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Header from "../components/Header";
@@ -7,142 +6,170 @@ import SourceSelector from "../components/SourceSelector";
 import GenerateButton from "../components/GenerateButton";
 import Footer from "../components/Footer";
 import ErrorMessage from "../components/ErrorMessage";
-// import { AxiosError } from "axios";
+import SummaryCard from "../components/SummaryCard";
+import AnalysisCard from "../components/AnalysisCard";
 
 const HomePage = () => {
-  const [loading, setLoading] = useState(false);
-  
-  // untuk sementara pake fix yang batamnews dulu yak
-  const [source, setSource] = useState("batamnews");
 
+  const [loading, setLoading] = useState(false);
+  const [source, setSource] = useState("batamnews");
   const [keyword, setKeyword] = useState("");
 
-  console.log("SELECTED SOURCE:", source);
-
-  const navigate = useNavigate();
-  
+  const [result, setResult] = useState<any>(null);
   const [error, setError] = useState("");
-  
-  const handleGenerate = async () => {
+  const [hasGenerated, setHasGenerated] = useState(false);
 
+  const handleGenerate = async () => {
     setError("");
 
     if (!keyword) {
-      setError("Masukkan keyword dulu.");
+      setError("Masukkan keyword dulu");
       return;
     }
 
     try {
+
       setLoading(true);
 
-    const result = await processNews(source, keyword);
+      const response = await processNews(
+        source,
+        keyword
+      );
 
+      console.log(response.data);
 
-      navigate("/result", {
-        state: result
-      });
+      setResult(response);
+
+      setHasGenerated(true);
 
     } catch (error: any) {
 
-      console.log("FULL ERROR:", error)
-
-      console.log(
-        "FULL RESPONSE:",
-        error.response?.data
-      );
-
-      const backendError = error.response?.data?.error;
-
-      console.log("BACKEND ERROR:", backendError);
+      const backendError =
+        error.response?.data?.error;
 
       switch (backendError) {
 
         case "GEMINI_QUOTA_EXCEEDED":
-          setError(
-            "Kuota AI hari ini habis. Coba lagi nanti."
-          );
-          break;
-
-        case "GEMINI_UNAVAILABLE":
-          setError(
-            "AI sedang sibuk, coba beberapa saat lagi."
-          );
-          break;
-
-        case "TRIBUN_BATAM_NOT_READY":
-          setError(
-            "Scraper Tribun Batam belum tersedia."
-          );
-          console.log("Tribun News not ready.");
-          break;
-        
-        case "BATAM_POS_NOT_READY":
-          setError(
-            "Scraper Batam Pos Not Ready"
-          );
-          console.log("Batam pos not ready.");
-          break;
-
-        case "SCRAPER_FAILED":
-          setError(
-            "Gagal mengambil berita dari website."
-          );
+          setError("Kuota AI habis.");
           break;
 
         default:
-          setError(
-            "Server sedang bermasalah."
-          );
+          setError("Server bermasalah");
       }
 
     } finally {
+
       setLoading(false);
+
     }
   };
 
   return (
+
     <div className="page-container">
 
       <Header />
 
       <div className="content-wrap">
-        <div className="control-box">
+
+        {
+          !hasGenerated && (
+
+            <div className="intro-section">
+
+              <h2>
+                Ringkas Berita Regional dengan AI
+              </h2>
+
+              <p>
+                Sistem ini mengambil berita terbaru dari portal berita Batam
+                dan menghasilkan analisis otomatis.
+              </p>
+
+              <div className="feature-list">
+
+                <div>✓ Ringkasan otomatis</div>
+
+                <div>✓ NLP Sentiment</div>
+
+                <div>✓ Wordcloud</div>
+
+                <div>✓ Gemini AI</div>
+
+              </div>
+
+            </div>
+          )
+        }
+
+        <div className="hero-card">
+
           <SourceSelector
             source={source}
             setSource={setSource}
           />
 
-          <input 
-            type="text"
-            placeholder="Masukkan keyword..."
+          <input
+            className="keyword-input"
             value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Masukkan keyword..."
+            onChange={(e) =>
+              setKeyword(e.target.value)
+            }
           />
 
           {
-            loading ? (
-              <LoadingSpinner 
-                source={source}
-              />
-            ) : (
-              <GenerateButton 
+            loading
+            ? <LoadingSpinner source={source}/>
+            : (
+              <GenerateButton
                 onClick={handleGenerate}
                 loading={loading}
               />
             )
           }
+
+          {
+            error &&
+            <ErrorMessage message={error}/>
+          }
+
         </div>
+
         {
-        error && (
-          <ErrorMessage
-            message={error}
-          />
-        )
-      }
+          result && (
+
+            <div className="result-section">
+
+              <SummaryCard
+                summary={result.data.summary}
+                articleCount={result.data.articles_count}
+                source={result.data.source}
+                keyword={result.data.keyword}
+              />
+
+              <AnalysisCard
+                articles={result.data.articles}
+                sentimentDistribution={
+                  result.data.sentiment_distribution
+                }
+                wordcloudPath={
+                  `${result.data.wordcloud.trim()}`
+                }
+                sentimentChartPath={
+                  `${result.data.sentiment_chart.trim()}`
+                }
+              />
+
+            </div>
+          )
+        }
+
       </div>
-      <Footer />  
+
+      <Footer />
+
     </div>
   );
 };
-
 export default HomePage;

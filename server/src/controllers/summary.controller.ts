@@ -1,36 +1,6 @@
 import { Request, Response } from "express";
 import { summarizeArticles } from "../services/gemini/gemini.service";
 
-// export const generateSummary = async (
-//   req: Request,
-//   res: Response
-// ) => {
-//   try {
-//     const { articles } = req.body;
-
-//     const contents = articles.map(
-//       (article: any) => article.content
-//     );
-
-//     const summary = await summarizeArticles(
-//       contents
-//     );
-
-//     res.json({
-//       success: true,
-//       summary,
-//     });
-
-//   } catch (error) {
-//     console.error(error);
-
-//     res.status(500).json({
-//       success: false,
-//       message: "Summary generation failed",
-//     });
-//   }
-// };
-
 export const generateSummary = async (
   req: Request,
   res: Response

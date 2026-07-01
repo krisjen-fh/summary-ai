@@ -1,155 +1,3 @@
-// // type Props = {
-// //   articles: any[];
-// //   articleCount: number;
-// // };
-
-// // const AnalysisCard = ({
-// //   articles,
-// //   articleCount
-// // }: Props) => {
-
-// //   return (
-
-// //     <div className="analysis-card">
-
-// //       <h2>
-// //         NLP Analysis
-// //       </h2>
-
-// //       <p>
-// //         Total scraped articles:
-// //         {articleCount}
-// //       </p>
-
-// //       <h3>
-// //         Relevant Articles
-// //       </h3>
-
-// //       {
-// //         articles.map((article, index) => (
-
-// //           <div
-// //             key={index}
-// //             className="article-box"
-// //           >
-
-// //             <h4>
-// //               {article.title}
-// //             </h4>
-
-// //             <p>
-// //               Sentiment:
-// //               {article.sentiment}
-// //             </p>
-
-// //             <p>
-// //               Similarity:
-// //               {
-// //                 article.similarity_score
-// //                   ?.toFixed(4)
-// //               }
-// //             </p>
-
-// //             <a
-// //               href={article.link}
-// //               target="_blank"
-// //             >
-// //               Read Article
-// //             </a>
-
-// //             <hr />
-
-// //           </div>
-
-// //         ))
-// //       }
-
-// //     </div>
-// //   );
-// // };
-
-// // export default AnalysisCard;
-
-// type Props = {
-//   sentimentDistribution: {
-//     positive: number;
-//     neutral: number;
-//     negative: number;
-//   };
-
-//   wordcloudPath: string;
-
-//   sentimentChartPath: string;
-// };
-
-// const AnalysisCard = ({
-//   sentimentDistribution,
-//   wordcloudPath,
-//   sentimentChartPath
-// }: Props) => {
-//   return (
-//     <div className="analysis-card">
-
-//       <h2>
-//         NLP Analysis
-//       </h2>
-
-//       <div>
-
-//         <p>
-//           Positive:
-//           {sentimentDistribution.positive}
-//         </p>
-
-//         <p>
-//           Neutral:
-//           {sentimentDistribution.neutral}
-//         </p>
-
-//         <p>
-//           Negative:
-//           {sentimentDistribution.negative}
-//         </p>
-
-//       </div>
-
-//       <h3>Word Cloud</h3>
-
-//       <img
-//         src={`http://localhost:5000/output/${wordcloudPath}`}
-//         alt="wordcloud"
-//       />
-
-//       <h3>Sentiment Distribution</h3>
-
-//       <img
-//         src={`http://localhost:5000/output/${sentimentChartPath}`}
-//         alt="chart"
-//       />
-
-//       <h3>Top Relevant Articles</h3>
-
-//         <div>
-
-//         <p>{article.title}</p>
-
-//         <p>
-//         Sentiment: {article.sentiment}
-//         </p>
-
-//         <p>
-//         Score: {article.similarity_score}
-//         </p>
-
-//         </div>
-
-//     </div>
-//   );
-// };
-
-// export default AnalysisCard;
-
-
 type Props = {
   articles: any[];
 
@@ -160,7 +8,6 @@ type Props = {
   };
 
   wordcloudPath: string;
-
   sentimentChartPath: string;
 };
 
@@ -170,83 +17,103 @@ const AnalysisCard = ({
   wordcloudPath,
   sentimentChartPath
 }: Props) => {
+
   return (
+
     <div className="analysis-card">
 
-      <h2>NLP Analysis</h2>
+      <h2>NLP Analysis Dashboard</h2>
 
-      <h3>Preprocessing</h3>
+      {/* sentiment overview */}
 
-      <ul>
-        <li>Lowercase</li>
-        <li>Punctuation Removal</li>
-        <li>Stopword Removal</li>
-        <li>Stemming</li>
-      </ul>
+      <div className="analysis-grid">
 
-      <h3>Sentiment Distribution</h3>
+        <div className="sentiment-box">
 
-      <p>
-        Positive:
-        {sentimentDistribution.positive}
-      </p>
+          <h3>Sentiment Distribution</h3>
 
-      <p>
-        Neutral:
-        {sentimentDistribution.neutral}
-      </p>
+          <div className="sentiment-stats">
 
-      <p>
-        Negative:
-        {sentimentDistribution.negative}
-      </p>
+            <div className="positive-stat">
+              Positive: {sentimentDistribution.positive}
+            </div>
 
-      <img
-        src={`http://localhost:5000/output/${sentimentChartPath}`}
-      />
+            <div className="neutral-stat">
+              Neutral: {sentimentDistribution.neutral}
+            </div>
 
-      <h3>Keyword Relevance</h3>
+            <div className="negative-stat">
+              Negative: {sentimentDistribution.negative}
+            </div>
 
-      <img
-        src={`http://localhost:5000/output/${wordcloudPath}`}
-      />
+          </div>
 
-      <h3>Top Relevant Articles</h3>
+        </div>
 
-      {
-        articles.map((article, index) => (
+        <div className="chart-box">
 
-          <div key={index}>
+          <img
+            src={`http://localhost:5000/${sentimentChartPath.trim()}`}
+            alt="Sentiment Chart"
+          />
 
-            <p>
+        </div>
+
+      </div>
+
+      {/* wordcloud */}
+
+      <div className="wordcloud-section">
+
+        <h3>Keyword Relevance</h3>
+
+        <img
+          src={`http://localhost:5000/${wordcloudPath.trim()}`}
+          alt="Wordcloud"
+        />
+
+      </div>
+
+      {/* article list */}
+
+      <div className="article-section">
+
+        <h3>Top Relevant Articles</h3>
+
+        {articles.map((article, index) => (
+
+          <div
+            className="article-item"
+            key={index}
+          >
+
+            <h4>
               {article.title}
-            </p>
+            </h4>
 
-            <p>
-              Sentiment:
-              {article.sentiment}
-            </p>
+            <div className="article-meta">
 
-            <p>
-              Similarity:
-              {article.similarity_score}
-            </p>
+              <span>
+                Sentiment: {article.sentiment}
+              </span>
+
+            </div>
 
             <a
               href={article.link}
               target="_blank"
             >
-              Open Article
+              Read Article →
             </a>
-
-            <hr />
 
           </div>
 
-        ))
-      }
+        ))}
+
+      </div>
 
     </div>
+
   );
 };
 

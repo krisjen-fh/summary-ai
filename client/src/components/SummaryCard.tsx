@@ -1,49 +1,3 @@
-// type Props = {
-//   summary: string;
-//   source: string;
-// };
-
-// import { parseSummary } from "../utils/summaryParser";
-
-// const SummaryCard = ({
-//   summary,
-//   source
-// }: Props) => {
-
-//   const parsed = parseSummary(summary);
-
-//   return (
-//     <div className="summary-card">
-
-//       <h2>AI Summary</h2>
-
-//       <p>Sumber: {source}</p>
-
-//       <p>{parsed.mainSummary}</p>
-
-//       <h3>Topik Utama</h3>
-
-//       <ul>
-//         {
-//           parsed.topics.map((topic, index) => (
-//             <li key={index}>
-//               {topic}
-//             </li>
-//           ))
-//         }
-//       </ul>
-
-//       <h3>Kesimpulan</h3>
-
-//       <p>{parsed.conclusion}</p>
-
-//     </div>
-//   );
-// };
-
-// export default SummaryCard;
-
-
 type Props = {
   summary: string;
   articleCount: number;
@@ -60,31 +14,46 @@ const SummaryCard = ({
   keyword
 }: Props) => {
   const parsed = parseSummary(summary);
+  console.log("keyword", keyword);
   return (
     <div className="summary-card">
-
     <h2>AI Summary</h2>
+    <div className="summary-meta">
+      <span>
+        {source}
+      </span>
+      <span>
+        Keyword: {keyword}
+      </span>
+      <span>
+        {articleCount} artikel
+      </span>
+    </div>
 
-    <p>Sumber: {source}</p>
-
-    <p>Keyword: {keyword}</p>
-
-    <p>Total Artikel: {articleCount}</p>
-
-    <hr />
-
-    <p>{parsed.mainSummary}</p>
-
-    <h3>Topik Utama</h3>
-
-    <ul>
-    ...
-    </ul>
-
-    <h3>Kesimpulan</h3>
-
-    <p>{parsed.conclusion}</p>
-
+    <div className="summary-section">
+      <h3>Ringkasan Utama</h3>
+      <p className="main-summary">
+        {parsed.mainSummary}
+      </p>
+    </div>
+    <div className="summary-section">
+      <h3>Topik Utama</h3>
+      <ul>
+        {parsed.topics.map((topic, index) => (
+          <li key={index}>
+            {topic}
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className="summary-section">
+      <div className="summary-conclusion">
+        <h3>Kesimpulan</h3>
+        <p>
+          {parsed.conclusion}
+        </p>
+      </div>
+    </div>
     </div>
   );
 };
