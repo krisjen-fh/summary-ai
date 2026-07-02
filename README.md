@@ -327,15 +327,15 @@ summora/
 ├── backend/
 │   ├── routes/
 │   ├── controllers/
-│   ├── server.js
+│   ├── server
 │   └── api/
+├   └── python/
+│       ├── scraper.py
+│       ├── preprocess.py
+│       ├── vectorizer.py
+│       ├── sentiment.py
+│       └── pipeline.py
 │
-├── scraper/
-│   ├── scraper.py
-│   ├── preprocess.py
-│   ├── vectorizer.py
-│   ├── sentiment.py
-│   └── pipeline.py
 │
 └── README.md
 ```
