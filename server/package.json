@@ -1,16 +1,15 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev src/app.ts"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "main": "dist/app.js",
   "type": "commonjs",
+
+  "scripts": {
+    "dev": "ts-node-dev src/app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "axios": "^1.17.0",
@@ -19,6 +18,7 @@
     "dotenv": "^17.4.2",
     "express": "^5.2.1"
   },
+
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
