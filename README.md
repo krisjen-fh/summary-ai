@@ -432,19 +432,6 @@ node server.js
 ```bash
 pip install -r requirements.txt
 ```
-
-Example dependencies:
-
-```txt
-scikit-learn
-beautifulsoup4
-requests
-nltk
-wordcloud
-numpy
-pandas
-```
-
 ---
 
 ## Environment Variables
@@ -463,7 +450,6 @@ PORT=5000
 The system generates:
 
 * Relevant news articles based on keyword
-* Similarity score results
 * Sentiment analysis result
 * AI-generated summary
 * Word cloud visualization
@@ -486,121 +472,7 @@ Possible future development:
 ## Author
 
 Final Project / Internship Project
-
+Made by Krisjen Fraulein Hutagalung
 Project Name: Summora
-
-```
-```
-
-### Backend → Frontend Response
-
-Backend returns processed data.
-
-Example:
-
-```json
-{
-  "summary": "...",
-  "sentiment": "positive",
-  "articles": [...],
-  "wordcloud": "generated"
-}
-```
-
----
-
-## Installation
-
-### Clone Repository
-
-```bash
-git clone https://github.com/yourusername/summora.git
-cd summora
-```
-
----
-
-### Frontend Setup
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
----
-
-### Backend Setup
-
-```bash
-cd backend
-npm install
-node server.js
-```
-
----
-
-### Python Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Example dependencies:
-
-```txt
-scikit-learn
-beautifulsoup4
-requests
-nltk
-wordcloud
-numpy
-pandas
-```
-
----
-
-## Environment Variables
-
-Create `.env` file.
-
-```env
-GEMINI_API_KEY=your_api_key
-PORT=5000
-```
-
----
-
-## Expected Output
-
-The system generates:
-
-* Relevant news articles based on keyword
-* Similarity score results
-* Sentiment analysis result
-* AI-generated summary
-* Word cloud visualization
-
----
-
-## Future Improvements
-
-Possible future development:
-
-* More news source integration
-* Multi-language summarization
-* Export summary to PDF
-* Dashboard analytics
-* User history tracking
-* Real-time news monitoring
-
----
-
-## Author
-
-Final Project / Internship Project
-
-Project Name: Summora
-
 ```
 ```
