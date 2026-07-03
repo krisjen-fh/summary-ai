@@ -586,6 +586,37 @@ a {
   font-weight:500;
 }
 
+.error-card{
+    width:100%;
+    margin-top:20px;
+    display:flex;
+    gap:16px;
+    align-items:flex-start;
+    padding:16px 18px;
+    border-radius:14px;
+    background:#fff4f4;
+    border:1px solid #ffc8c8;
+    color:#9b1c1c;
+    animation:fadeUp .25s ease;
+}
+
+.error-icon{
+    font-size:22px;
+}
+
+.error-card h4{
+    margin:0;
+    font-size:15px;
+    font-weight:700;
+}
+
+.error-card p{
+    margin-top:4px;
+    color:#6b2d2d;
+    font-size:14px;
+    line-height:1.5;
+}
+
 @keyframes spin{
   to{
     transform:rotate(360deg);
