@@ -50,6 +50,9 @@ def scrape_batamnews():
             timeout=10
         )
         print("STATUS CODE:", response.status_code, file=sys.stderr)
+        print(response.url, file=sys.stderr)
+        print(response.status_code, file=sys.stderr)
+        print(response.headers, file=sys.stderr)
         print(response.text[:500], file=sys.stderr)
 
         soup = BeautifulSoup(
@@ -132,6 +135,13 @@ def scrape_batamnews():
             "published_date": published_date,
             "link": news_link
         })
+
+    if not articles:
+        print("NOT GETTING THAT ARTICLES", file=sys.stderr)
+        return {
+            "articles": [],
+            "error": "SCRAPER_RETURNED_EMPTY"
+        }
 
     return articles
 
