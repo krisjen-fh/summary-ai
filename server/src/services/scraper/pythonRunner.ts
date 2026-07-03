@@ -6,13 +6,8 @@
     ): Promise<any> => {
         return new Promise((resolve, reject) => {
             console.log("Running Python with keyword:", keyword);
-            const pythonPath = path.join(
-                process.cwd(),
-                "python",
-                "venv",
-                "Scripts",
-                "python.exe"
-            );
+            const pythonPath = 
+                process.env.PYTHON_PATH || 'python3'
             const pythonProcess = spawn(pythonPath, [
                 "-m",
                 "nlp.pipeline",
@@ -25,6 +20,16 @@
 
             let dataBuffer = "";
             let errorBuffer = "";
+
+            console.log(
+                "PYTHON PATH FROM ENV:",
+                process.env.PYTHON_PATH
+            );
+
+            pythonProcess.on("error", (error) => {
+            console.error("SPAWN FAILED:", error);
+            reject(error);
+            });
 
             pythonProcess.stdout.on("data", (data) => {
                 dataBuffer += data.toString();

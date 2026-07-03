@@ -25,7 +25,7 @@ def scrape_batamnews():
             headers = headers,
             timeout=10
         )
-        print(response.status_code, file=sys.stderr)
+        print("STATUS CODE:", response.status_code, file=sys.stderr)
 
         soup = BeautifulSoup(
             response.text,
@@ -55,6 +55,7 @@ def scrape_batamnews():
                 links.append(full_url)
 
     links = list(set(links))
+    print("TOTAL LINKS:", len(links), file=sys.stderr)
 
     articles = []
 
@@ -65,7 +66,6 @@ def scrape_batamnews():
             headers= headers,
             timeout=10
         )
-        print(response.status_code, file=sys.stderr)
 
         soup = BeautifulSoup(
             response.text,

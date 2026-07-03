@@ -30,6 +30,7 @@ __pycache__/
 
 venv/
 env/
+python/venv/
 .python-version
 
 

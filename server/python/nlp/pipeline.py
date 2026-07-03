@@ -61,7 +61,7 @@ def run_pipeline(keyword):
 
     # chunking relevan artikel, supaya gemini ga kena limit
     article_chunks = chunk_articles(relevant_articles)
-    print("Total chunks: ", len(article_chunks), ile=sys.stderr)
+    print("Total chunks: ", len(article_chunks), file=sys.stderr)
 
     # buat diagram batang sentimen
     sentiment_chart_path = create_sentiment_chart(relevant_articles)
