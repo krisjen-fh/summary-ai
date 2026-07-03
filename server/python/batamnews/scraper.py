@@ -7,7 +7,22 @@ import sys
 def scrape_batamnews():
     headers = {
         "User-Agent":
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
+
+        "Accept":
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+
+        "Accept-Language":
+            "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+
+        "Referer":
+            "https://www.google.com/",
+
+        "Connection":
+            "keep-alive",
+
+        "Upgrade-Insecure-Requests":
+            "1"
     }
 
     base_url_links = []
@@ -26,6 +41,7 @@ def scrape_batamnews():
             timeout=10
         )
         print("STATUS CODE:", response.status_code, file=sys.stderr)
+        print(response.text[:500], file=sys.stderr)
 
         soup = BeautifulSoup(
             response.text,
@@ -66,6 +82,7 @@ def scrape_batamnews():
             headers= headers,
             timeout=10
         )
+        print(response.text[:500], file=sys.stderr)
 
         soup = BeautifulSoup(
             response.text,
