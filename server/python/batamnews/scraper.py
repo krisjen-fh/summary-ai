@@ -1,10 +1,11 @@
-import requests
+import cloudscraper
 from bs4 import BeautifulSoup
 import json
 import sys
 
 
 def scrape_batamnews():
+
     headers = {
         "User-Agent":
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
@@ -25,6 +26,14 @@ def scrape_batamnews():
             "1"
     }
 
+    scraper = cloudscraper.create_scraper(
+        browser={
+            "browser": "chrome",
+            "platform": "windows",
+            "mobile": False
+        }
+    )
+
     base_url_links = []
 
     for i in range(1, 2):
@@ -35,7 +44,7 @@ def scrape_batamnews():
 
     for url in base_url_links:
 
-        response = requests.get(
+        response = scraper.get(
             url,
             headers = headers,
             timeout=10
@@ -77,7 +86,7 @@ def scrape_batamnews():
 
     for news_link in links:
 
-        response = requests.get(
+        response = scraper.get(
             news_link,
             headers= headers,
             timeout=10
