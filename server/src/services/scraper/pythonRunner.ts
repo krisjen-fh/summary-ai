@@ -1,11 +1,19 @@
     import { spawn } from "child_process";
+    import path from "path";
 
     export const runPythonRunner = (
         keyword: string
     ): Promise<any> => {
         return new Promise((resolve, reject) => {
             console.log("Running Python with keyword:", keyword);
-            const pythonProcess = spawn("python3", [
+            const pythonPath = path.join(
+                process.cwd(),
+                "python",
+                "venv",
+                "Scripts",
+                "python.exe"
+            );
+            const pythonProcess = spawn(pythonPath, [
                 "-m",
                 "nlp.pipeline",
                 keyword

@@ -1,9 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 import json
+import sys
 
 
 def scrape_batamnews():
+    headers = {
+        "User-Agent":
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    }
 
     base_url_links = []
 
@@ -15,8 +20,12 @@ def scrape_batamnews():
 
     for url in base_url_links:
 
-        response = requests.get(url)
-        # print(response.status_code)
+        response = requests.get(
+            url,
+            headers = headers,
+            timeout=10
+        )
+        print(response.status_code, file=sys.stderr)
 
         soup = BeautifulSoup(
             response.text,
@@ -51,7 +60,12 @@ def scrape_batamnews():
 
     for news_link in links:
 
-        response = requests.get(news_link)
+        response = requests.get(
+            news_link,
+            headers= headers,
+            timeout=10
+        )
+        print(response.status_code, file=sys.stderr)
 
         soup = BeautifulSoup(
             response.text,

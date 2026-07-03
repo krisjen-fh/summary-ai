@@ -34,7 +34,6 @@ def count_sentiment(articles):
 def run_pipeline(keyword):
     # dapetin artikel
     articles = scrape_batamnews()[:10]
-    # print("Total article: ", len(articles))
 
     # kalau scraping di blok web
     # articles = get_dummy_articles()
@@ -55,12 +54,14 @@ def run_pipeline(keyword):
         sentiment = classify_sentiment(article["cleaned_content"])
         article["sentiment"] = sentiment    
 
+    print("RELEVANT ARTICLES:", len(relevant_articles), file=sys.stderr)
+
     #hitung sentimen yang ada di relevan artikel
     sentiment_summary = count_sentiment(relevant_articles)
 
     # chunking relevan artikel, supaya gemini ga kena limit
     article_chunks = chunk_articles(relevant_articles)
-    # print("Total chunks: ", len(article_chunks))
+    print("Total chunks: ", len(article_chunks), ile=sys.stderr)
 
     # buat diagram batang sentimen
     sentiment_chart_path = create_sentiment_chart(relevant_articles)
