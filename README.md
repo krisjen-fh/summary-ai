@@ -172,8 +172,14 @@ summora/
 │   ├── api/
 │   ├── python/
 │   │   ├── batamnews/
+│   │   │   └── __init__.py
 │   │   │   └── scraper.py
-│   │   └── batamnews/
+│   │   └── tribunnews/
+│   │   │   └── __init__.py
+│   │   │   └── scraper.py
+│   │   └── batampos/
+│   │   │   └── __init__.py
+│   │   │   └── scraper.py
 │   └── nlp/
 │       ├── pipeline.py
 │       ├── preprocess.py
