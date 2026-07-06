@@ -147,7 +147,7 @@ L --> M
 ### Clone
 
 ```bash
-git clone https://github.com/yourusername/summora.git
+git clone https://github.com/krisjen-fh/summary-ai
 cd summora
 ```
 
