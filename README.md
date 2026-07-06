@@ -169,14 +169,21 @@ summora/
 │   ├── routes/
 │   ├── controllers/
 │   ├── server.js
-│   └── api/
-│
-├── scraper/
-│   ├── scraper.py
-│   ├── preprocess.py
-│   ├── vectorizer.py
-│   ├── sentiment.py
-│   └── pipeline.py
+│   ├── api/
+│   ├── python/
+│   │   ├── batamnews/
+│   │   │   └── scraper.py
+│   │   └── batamnews/
+│   └── nlp/
+│       ├── pipeline.py
+│       ├── preprocess.py
+│       ├── sentiment.py
+│       ├── summarizer.py
+│       ├── vectorizer.py
+│       ├── visualize_sentiment.py
+│       ├── visualize.py 
+│       ├── sentiment_chart.png
+│       └── wordcloud.png
 │
 └── README.md
 ```
