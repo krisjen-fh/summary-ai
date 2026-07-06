@@ -1,232 +1,217 @@
-# Summora
+# 📰 Summora
 
-AI-powered news summarization platform built using Natural Language Processing (NLP), Information Retrieval, and Generative AI.
+> AI-powered news summarization platform that combines **NLP**, **Information Retrieval**, and **Generative AI** to transform lengthy news articles into concise, meaningful insights.
 
----
-
-## Overview
-
-Summora is a web-based application designed to help users quickly understand information from news articles by automatically retrieving, analyzing, and summarizing content from multiple news sources.
-
-The system combines traditional NLP techniques such as TF-IDF Vectorization and Cosine Similarity Search with Generative AI summarization to generate concise and relevant information.
-
-Main capabilities:
-
-- News article scraping from multiple sources
-- Text preprocessing pipeline
-- TF-IDF vectorization
-- Cosine similarity-based article retrieval
-- Sentiment analysis
-- AI-powered summarization
-- Word cloud visualization
-- Interactive web interface
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
+![Python](https://img.shields.io/badge/Python-NLP-yellow?logo=python)
+![Gemini](https://img.shields.io/badge/Google-Gemini-blue?logo=google)
+![License](https://img.shields.io/badge/License-MIT-success)
 
 ---
 
-## System Architecture
+## ✨ Demo
+
+> ![](images/demo.gif)
+
+---
+
+## 📖 About
+
+Summora is a web application that automatically retrieves news articles from multiple online sources and generates concise AI-powered summaries.
+
+Instead of reading multiple articles, users simply enter a keyword and select a news source. The application collects relevant articles, processes them using Natural Language Processing techniques, analyzes their sentiment, and generates a readable summary using Google's Gemini API.
+
+---
+
+## 🚀 Features
+
+- 🌐 Multi-source news scraping
+- 🔎 Keyword-based article retrieval
+- 🧹 Automated text preprocessing
+- 📊 TF-IDF vectorization
+- 🎯 Cosine similarity ranking
+- 😊 Sentiment analysis
+- 🤖 AI-generated summaries
+- ☁️ Word cloud visualization
+- 💻 Responsive web interface
+
+---
+
+## ⚙️ How It Works
 
 ```text
-User Input (Keyword + Source)
-                │
-                ▼
-        Article Scraping
-            (Python)
-                │
-                ▼
-        Text Preprocessing
-  - Lowercase Conversion
-  - Remove Punctuation
-  - Stopword Removal
-  - Stemming
-                │
-                ▼
-        TF-IDF Vectorization
-                │
-                ▼
-      Cosine Similarity Search
-                │
-                ▼
-    Retrieve Relevant Articles
-          ┌─────────────┐
-          │             │
-          ▼             ▼
-  Sentiment Analysis   Summary Module
-          │             │
-          ▼             ▼
- WordCloud Visualization Gemini API
-          └──────┬──────┘
-                 ▼
-           Display Result
-````
+User Input
+     │
+     ▼
+Article Scraping
+     │
+     ▼
+Text Preprocessing
+     │
+     ▼
+TF-IDF Vectorization
+     │
+     ▼
+Cosine Similarity Search
+     │
+     ▼
+Relevant Articles
+     │
+ ┌───┴────────────┐
+ ▼                ▼
+Sentiment      Gemini API
+Analysis       Summarization
+ └──────┬─────────┘
+        ▼
+ Display Results
+```
 
 ---
 
-## Tech Stack
+## 🛠 Tech Stack
 
-### Frontend
-
-* React.js
-* Vite
-* Axios
-* CSS
-
-### Backend
-
-* Node.js
-* Express.js
-
-### NLP Processing
-
-* Python
-* Scikit-learn
-* TF-IDF Vectorizer
-* Cosine Similarity
-
-### AI Integration
-
-* Gemini API
-
-### Data Processing
-
-* BeautifulSoup
-* Regex
-* Stopword Removal
-* Stemming
-
-### Visualization
-
-* WordCloud
+| Category | Technologies |
+|----------|--------------|
+| Frontend | React, Vite, Axios, CSS |
+| Backend | Node.js, Express.js |
+| NLP | Python, Scikit-learn, TF-IDF, Cosine Similarity |
+| AI | Gemini API |
+| Data Processing | BeautifulSoup, Regex, Stopword Removal, Stemming |
+| Visualization | WordCloud |
 
 ---
 
-## Features
+## 📂 Project Structure
 
-### 1. Source Selection
-
-Users can choose a news source before starting the analysis process.
-
-### 2. Keyword Search
-
-Users input a keyword to search related articles.
-
-### 3. Web Scraping
-
-The system automatically retrieves articles from the selected source.
-
-### 4. Text Preprocessing
-
-Text preprocessing includes:
-
-* Lowercase conversion
-* Removing punctuation
-* Stopword removal
-* Stemming
-
-### 5. TF-IDF Vectorization
-
-Articles are transformed into numerical vectors using TF-IDF.
-
-### 6. Similarity Search
-
-The system calculates similarity between user keywords and articles using cosine similarity.
-
-### 7. Article Retrieval
-
-The most relevant articles are ranked and selected.
-
-### 8. Sentiment Analysis
-
-Sentiment classification is performed on retrieved articles.
-
-Possible labels:
-
-* Positive
-* Neutral
-* Negative
-
-### 9. AI Summary Generation
-
-Relevant articles are sent to Gemini API to generate concise summaries.
-
-### 10. Visualization
-
-Word cloud visualization is generated from processed article data.
-
----
-
-## Project Structure
-
-```bash
+```text
 summora/
-│
 ├── frontend/
-│   ├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-│
 ├── backend/
-│   ├── routes/
 │   ├── controllers/
-│   ├── server.js
+│   ├── routes/
 │   ├── api/
 │   ├── python/
 │   │   ├── batamnews/
-│   │   │   └── __init__.py
-│   │   │   └── scraper.py
-│   │   └── tribunnews/
-│   │   │   └── __init__.py
-│   │   │   └── scraper.py
+│   │   ├── tribunnews/
 │   │   └── batampos/
-│   │   │   └── __init__.py
-│   │   │   └── scraper.py
 │   └── nlp/
-│       ├── pipeline.py
 │       ├── preprocess.py
+│       ├── vectorizer.py
 │       ├── sentiment.py
 │       ├── summarizer.py
-│       ├── vectorizer.py
-│       ├── visualize_sentiment.py
-│       ├── visualize.py 
-│       ├── sentiment_chart.png
-│       └── wordcloud.png
-│
+│       └── pipeline.py
 └── README.md
 ```
 
 ---
 
-## API Flow
+## 🔄 Workflow
 
-### Frontend → Backend
+```mermaid
+flowchart TD
 
-React sends request to backend API.
+A[User Input]
+B[React Frontend]
+C[Express Backend]
+D[Python Pipeline]
+E[News Scraper]
+F[Text Preprocessing]
+G[TF-IDF]
+H[Cosine Similarity]
+I[Relevant Articles]
+J[Gemini API]
+K[Sentiment Analysis]
+L[Word Cloud]
+M[Results]
 
-Example:
-
-```javascript
-axios.post("/api/process", {
-  keyword: "economy",
-  source: "news_source"
-})
+A --> B
+B --> C
+C --> D
+D --> E
+E --> F
+F --> G
+G --> H
+H --> I
+I --> J
+I --> K
+K --> L
+J --> M
+L --> M
 ```
 
 ---
 
-### Backend → Python Pipeline
+## 🚀 Installation
 
-Express backend executes Python NLP pipeline.
+### Clone
 
-```text
-Node.js → Python Script → Scraping → Processing
+```bash
+git clone https://github.com/yourusername/summora.git
+cd summora
+```
+
+### Install Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### Install Backend
+
+```bash
+cd backend
+npm install
+node server.js
+```
+
+### Python Dependencies
+
+```bash
+pip install -r requirements.txt
 ```
 
 ---
 
-### Backend → Gemini API
+## 🔑 Environment Variables
 
-Backend sends relevant article content to Gemini API.
-
-```text
-Generate Summary → Gemini API
+```env
+GEMINI_API_KEY=your_api_key
+PORT=5000
 ```
+
+---
+
+## 📈 Output
+
+The application generates:
+
+- 📄 Relevant news articles
+- 🤖 AI-generated summaries
+- 😊 Sentiment analysis
+- ☁️ Word cloud visualization
+
+---
+
+## 🌱 Future Improvements
+
+- Add more news sources
+- Multi-language support
+- User authentication
+- Search history
+- PDF export
+- Real-time monitoring
+- RAG-based retrieval
+- Interactive analytics dashboard
+
+---
+
+## 👨‍💻 Author
+
+**Krisjen Fraulein Hutagalung**
+
+Final Project & Internship Project
+
+⭐ If you found this project interesting, consider giving it a star!
